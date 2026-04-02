@@ -1,0 +1,79 @@
+[
+  {
+    "title": "Water Leakage in Office",
+    "category": "Infrastructure",
+    "incidentDate": "2026-03-01",
+    "location": "Building A, Floor 3",
+    "urgency": "High",
+    "department": "IT",
+    "description": "There is continuous water leakage from the ceiling in the IT department causing damage to equipment.",
+    "impact": "Equipment damage and disruption to IT services",
+    "resolution": "Pending investigation and repair",
+    "id": 1774871049972,
+    "status": "submitted",
+    "createdAt": "2026-03-30T11:44:09.972Z",
+    "evidenceFiles": []
+  },
+  {
+    "title": "Unfair Work Assignment",
+    "category": "Workplace",
+    "incidentDate": "2026-03-17",
+    "location": "Building B, Floor 2",
+    "urgency": "Medium",
+    "department": "HR",
+    "description": "Consistently assigned more work than other team members without additional compensation.",
+    "impact": "Employee stress and potential burnout",
+    "resolution": "Awaiting HR review",
+    "id": 1774871214528,
+    "status": "submitted",
+    "createdAt": "2026-03-30T11:46:54.528Z",
+    "evidenceFiles": [
+      {}
+    ]
+  },
+  {
+    "title": "grievance",
+    "category": "Grievance3",
+    "incidentDate": "2026-04-02",
+    "location": "nellore",
+    "urgency": "Low",
+    "department": "health",
+    "description": "hafafiuafnaoihuoae",
+    "impact": "shfosoiowehtie",
+    "resolution": "ajhfaogaigoisdhoigh",
+    "id": 1775119049771,
+    "status": "submitted",
+    "createdAt": "2026-04-02T08:37:29.771Z",
+    "evidenceFiles": []
+  },
+  {
+    "title": "grievance ",
+    "category": "Grievance3",
+    "incidentDate": "2026-04-02",
+    "location": "nellore",
+    "urgency": "Low",
+    "department": "health",
+    "description": "jfiushfgoaslgfhois",
+    "impact": "sjfisdogahogfhoaehg",
+    "resolution": "ajbgfuisogfhoipagfo",
+    "id": 1775119615988,
+    "status": "submitted",
+    "createdAt": "2026-04-02T08:46:55.988Z",
+    "evidenceFiles": []
+  },
+  {
+    "title": "grievance",
+    "category": "Grievance3",
+    "incidentDate": "2026-04-02",
+    "location": "Hyderabad",
+    "urgency": "Low",
+    "department": "Healthcare",
+    "description": "kjabfksdaafsfbafihse",
+    "impact": "dsjfiuagfiaufoaegf",
+    "resolution": "jagfiasofgouaegf",
+    "id": 1775119818313,
+    "status": "submitted",
+    "createdAt": "2026-04-02T08:50:18.313Z",
+    "evidenceFiles": []
+  }
+]
