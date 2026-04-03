@@ -130,6 +130,12 @@ export default function Review() {
             </Typography>
           </ReviewCard>
 
+          <ReviewCard icon={CheckCircle} title="Desired Resolution">
+            <Typography sx={{ whiteSpace: "pre-wrap", color: "text.secondary" }}>
+              {data.resolution || "Not provided"}
+            </Typography>
+          </ReviewCard>
+
           <ReviewCard icon={Folder} title="Supporting Documents">
             {files.length > 0 ? (
               <Stack spacing={0.5}>
@@ -143,12 +149,6 @@ export default function Review() {
             ) : (
               <Typography>No supporting documents uploaded</Typography>
             )}
-          </ReviewCard>
-
-          <ReviewCard icon={CheckCircle} title="Desired Resolution">
-            <Typography sx={{ whiteSpace: "pre-wrap", color: "text.secondary" }}>
-              {data.resolution || "Not provided"}
-            </Typography>
           </ReviewCard>
         </Stack>
 

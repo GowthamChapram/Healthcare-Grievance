@@ -183,14 +183,6 @@ export async function deleteGrievance(id: number) {
   return false;
 }
 
-export async function bulkDeleteGrievances(ids: number[]) {
-  let DB = await loadDB();
-  const initialLength = DB.length;
-  DB = DB.filter((g) => !ids.includes(g.id));
-  await saveDB(DB);
-  return initialLength - DB.length;
-}
-
 export async function getGrievanceById(id: number) {
   const DB = await loadDB();
   return DB.find((g) => g.id === id);

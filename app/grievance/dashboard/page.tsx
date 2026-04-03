@@ -14,12 +14,13 @@ interface DashboardPageProps {
 }
 
 export default async function Dashboard({ searchParams }: DashboardPageProps) {
+  const params = await searchParams;
   const filters: GrievanceFilters = {
-    status: searchParams.status,
-    search: searchParams.search,
-    sortBy: (searchParams.sortBy as any) || "createdAt",
-    sortOrder: (searchParams.sortOrder as any) || "desc",
-    page: Number(searchParams.page) || 1,
+    status: params.status,
+    search: params.search,
+    sortBy: (params.sortBy as any) || "createdAt",
+    sortOrder: (params.sortOrder as any) || "desc",
+    page: Number(params.page) || 1,
     pageSize: 5,
   };
 

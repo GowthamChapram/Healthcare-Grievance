@@ -99,14 +99,14 @@ export default function DescriptionPage() {
             required={field.required}
           />
         ))}
-      </Box>
 
-      <FileUploadSection
-        title="Supporting Documents"
-        files={files}
-        onFilesChange={setFiles}
-        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
-      />
+        <FileUploadSection
+          title="Supporting Documents"
+          files={files}
+          onFilesChange={setFiles}
+          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov"
+        />
+      </Box>
 
       <FormActions
         onBack={handleBack}

@@ -17,12 +17,11 @@ export interface Grievance {
   department: string;
   description: string;
   impact: string;
-  evidence?: string;
-  evidenceFiles?: File[];
   resolution: string;
   status: "draft" | "submitted" | "resolved";
   createdAt: Date;
   updatedAt?: Date;
+  evidenceFiles?: File[];
 }
 
 export interface GrievanceFilters {
