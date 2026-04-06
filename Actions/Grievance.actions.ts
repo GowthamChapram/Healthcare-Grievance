@@ -2,42 +2,18 @@
 
 import { fullSchema } from "../Lib/Validations/Grievance.schema";
 import { Grievance, GrievanceFilters, GrievanceResponse } from "@/Types/Grievance.types";
-import { promises as fs } from "fs";
-import { join } from "path";
 
-const DB_FILE = join(process.cwd(), "data", "grievances.json");
+// In-memory storage for serverless environment
+let DB: Grievance[] = [];
 
-// Ensure data directory exists
-async function ensureDataDir() {
-  try {
-    await fs.mkdir(join(process.cwd(), "data"), { recursive: true });
-  } catch (error) {
-    // Directory already exists
-  }
+// Load grievances from memory
+function loadDB(): Grievance[] {
+  return DB;
 }
 
-// Load grievances from file
-async function loadDB(): Promise<Grievance[]> {
-  await ensureDataDir();
-  try {
-    const content = await fs.readFile(DB_FILE, "utf-8");
-    const data = JSON.parse(content);
-    // Convert createdAt strings back to Date objects
-    return data.map((g: any) => ({
-      ...g,
-      createdAt: new Date(g.createdAt),
-      updatedAt: g.updatedAt ? new Date(g.updatedAt) : undefined,
-    }));
-  } catch (error) {
-    // File doesn't exist yet, return empty array
-    return [];
-  }
-}
-
-// Save grievances to file
-async function saveDB(data: Grievance[]) {
-  await ensureDataDir();
-  await fs.writeFile(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
+// Save grievances to memory
+function saveDB(data: Grievance[]): void {
+  DB = data;
 }
 
 export async function saveDraft(data: any, files?: any[]) {
@@ -55,7 +31,7 @@ export async function saveDraft(data: any, files?: any[]) {
     ...data, // Spread the original data to preserve any additional fields
   };
 
-  const DB = await loadDB();
+  const DB = loadDB();
   const grievance: Grievance = {
     ...draftData,
     id: Date.now(),
@@ -65,7 +41,7 @@ export async function saveDraft(data: any, files?: any[]) {
   };
 
   DB.push(grievance);
-  await saveDB(DB);
+  saveDB(DB);
   return grievance;
 }
 
@@ -86,7 +62,7 @@ export async function submitGrievance(data: any, files?: any[]) {
 
     const parsed = fullSchema.parse(validatedData);
 
-    const DB = await loadDB();
+    const DB = loadDB();
 
     const grievance: Grievance = {
       ...parsed,
@@ -97,7 +73,7 @@ export async function submitGrievance(data: any, files?: any[]) {
     };
 
     DB.push(grievance);
-    await saveDB(DB);
+    saveDB(DB);
     return grievance;
   } catch (error: any) {
     // Handle Zod validation errors with field-specific messages
@@ -113,7 +89,7 @@ export async function submitGrievance(data: any, files?: any[]) {
 }
 
 export async function fetchGrievances(filters: GrievanceFilters = {}): Promise<GrievanceResponse> {
-  const DB = await loadDB();
+  const DB = loadDB();
   const {
     status,
     search,
@@ -173,23 +149,23 @@ export async function fetchGrievances(filters: GrievanceFilters = {}): Promise<G
 }
 
 export async function deleteGrievance(id: number) {
-  let DB = await loadDB();
+  let DB = loadDB();
   const index = DB.findIndex((g) => g.id === id);
   if (index !== -1) {
     DB.splice(index, 1);
-    await saveDB(DB);
+    saveDB(DB);
     return true;
   }
   return false;
 }
 
 export async function getGrievanceById(id: number) {
-  const DB = await loadDB();
+  const DB = loadDB();
   return DB.find((g) => g.id === id);
 }
 
 export async function updateGrievance(id: number, data: any, files?: any[]) {
-  let DB = await loadDB();
+  let DB = loadDB();
   const index = DB.findIndex((g) => g.id === id);
   if (index !== -1) {
     // Ensure all fields have values (use existing values as fallback)
@@ -210,7 +186,7 @@ export async function updateGrievance(id: number, data: any, files?: any[]) {
     };
 
     DB[index] = updatedData;
-    await saveDB(DB);
+    saveDB(DB);
     return DB[index];
   }
   throw new Error("Grievance not found");
