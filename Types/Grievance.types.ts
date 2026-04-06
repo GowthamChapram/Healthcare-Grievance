@@ -6,6 +6,13 @@ export type GrievanceData = z.infer<typeof fullSchema>;
 
 import { detailsSchema, descriptionSchema, fullSchema } from "@/Lib/Validations/Grievance.schema";
 
+// File metadata type for serialization
+export interface FileMetadata {
+  name: string;
+  size: number;
+  type: string;
+}
+
 // Dashboard-specific types
 export interface Grievance {
   id: number;
@@ -21,7 +28,7 @@ export interface Grievance {
   status: "draft" | "submitted" | "resolved";
   createdAt: Date;
   updatedAt?: Date;
-  evidenceFiles?: File[];
+  evidenceFiles?: FileMetadata[];
 }
 
 export interface GrievanceFilters {

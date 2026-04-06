@@ -40,7 +40,7 @@ async function saveDB(data: Grievance[]) {
   await fs.writeFile(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
 }
 
-export async function saveDraft(data: any, files?: File[]) {
+export async function saveDraft(data: any, files?: any[]) {
   // Ensure all required fields have default values for drafts
   const draftData = {
     title: data.title || "",
@@ -69,7 +69,7 @@ export async function saveDraft(data: any, files?: File[]) {
   return grievance;
 }
 
-export async function submitGrievance(data: any, files?: File[]) {
+export async function submitGrievance(data: any, files?: any[]) {
   try {
     // Ensure all required fields have values before validation
     const validatedData = {
@@ -188,7 +188,7 @@ export async function getGrievanceById(id: number) {
   return DB.find((g) => g.id === id);
 }
 
-export async function updateGrievance(id: number, data: any, files?: File[]) {
+export async function updateGrievance(id: number, data: any, files?: any[]) {
   let DB = await loadDB();
   const index = DB.findIndex((g) => g.id === id);
   if (index !== -1) {

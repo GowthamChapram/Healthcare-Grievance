@@ -12,7 +12,7 @@ import { FormActions } from "@/Components/Form/FormActions";
 import { useState } from "react";
 
 export default function Review() {
-  const { data, files } = useForm();
+  const { data, files, fileMetadata, clearForm } = useForm();
   const router = useRouter();
   const { loading, flash, executeAsync } = useAsyncAction();
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -21,7 +21,7 @@ export default function Review() {
 
   const handleSaveDraft = async () => {
     await executeAsync(
-      () => saveDraft(data, files),
+      () => saveDraft(data, fileMetadata),
       {
         successMessage: "Draft saved successfully.",
         errorMessage: "Failed to save draft. Please try again.",
@@ -52,11 +52,12 @@ export default function Review() {
     }
 
     await executeAsync(
-      () => submitGrievance(completeData, files),
+      () => submitGrievance(completeData, fileMetadata),
       {
         successMessage: "Grievance submitted successfully!",
         errorMessage: "Failed to submit grievance. Please try again.",
         onSuccess: () => {
+          clearForm();
           setIsRedirecting(true);
           router.push("/grievance/dashboard");
         },
@@ -137,9 +138,9 @@ export default function Review() {
           </ReviewCard>
 
           <ReviewCard icon={Folder} title="Supporting Documents">
-            {files.length > 0 ? (
+            {fileMetadata.length > 0 ? (
               <Stack spacing={0.5}>
-                {files.map((file, index) => (
+                {fileMetadata.map((file, index) => (
                   <Box key={index} sx={{ display: "flex", gap: 1 }}>
                     <InsertDriveFile />
                     <Typography variant="body2">{file.name}</Typography>
